@@ -35,7 +35,7 @@ services:
       - frontend-network
 
   mysql:
-    image: mysql:5.7
+    image: mariadb
     volumes:
       - ./mysql:/mysql
       - mysql_prod_data:/var/lib/mysql
@@ -44,7 +44,7 @@ services:
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_USER: "audino"
       MYSQL_PASSWORD: "audino"
-    command: --init-file=/mysql/create_database.sql --character-set-server=utf8mb4 --collation-server=utf8mb4_bin
+    command: --init-file=/mysql/create_database.sql --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --ignore-db-dir=lost+found --skip-innodb --default-storage-engine=myisam
     networks:
       - backend-network
 
